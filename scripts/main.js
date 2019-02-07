@@ -9,7 +9,7 @@ var model;
 var positionX = 0, positionY = 0, max = 500;
 var deathStar;
 var ActivateGUI = true;
-
+var shoot, lightShoot;
 var startButton = document.getElementById('startButton');
 startButton.addEventListener('click', init);
 
@@ -91,7 +91,18 @@ function init() {
     CreateGround();
     //createMenger(0, 10, 0, size, 1);
     CreateDeathStar(10, 0, 1, 10);
-    forestGen(-400,-400,400,400,200);
+    forestGen(-400,-400,400,400,100);
+
+    var mat = new THREE.LineBasicMaterial();
+    mat.color = new THREE.Color(0xFF0000);
+
+    shoot = new THREE.Mesh(new THREE.CubeGeometry(1,10,1), mat);
+
+    scene.add(shoot);
+
+    lightShoot = new THREE.PointLight(new THREE.Color(0xFF0000), 10.5);
+    lightShoot.distance = 100;
+    scene.add(lightShoot);
 
     if (ActivateGUI) {
         buildGui();
@@ -137,6 +148,8 @@ function animate()
 function render() {
     
     deathStar.rotation.y += 0.005;
+    shoot.translateY(10);
+    lightShoot.position.set(shoot.position.x, shoot.position.y, shoot.position.z);
     // différence de temps entre cet appel à la clock et le dernier.
     var time = clock.getDelta();
     // lance la fonction qui fait les déplacements
