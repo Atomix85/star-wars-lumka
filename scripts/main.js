@@ -79,6 +79,7 @@ function init() {
     //matin
     CreateAmbientLight(0x006622, 0.6);
     AddSunAndShadow(0, 20, 0, 0xf4f472, 2);
+    initStorm();
     //soir
     /*
     CreateAmbientLight(0x86391f, 0.1);
@@ -138,11 +139,16 @@ function onWindowResize() {
 
 function animate()
 {
+    
     requestAnimationFrame(animate);
     readKeyboard();
     IsCollision("deathStar", 10, 0, 1, 30);
-    
     render();
+    updateEnnemyShooter();
+    var time = clock.getDelta();
+    mixerEnnemy.update(time);
+    
+    
 }
 
 function render() {
