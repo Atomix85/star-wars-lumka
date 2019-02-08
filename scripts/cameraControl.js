@@ -23,7 +23,6 @@ function cameraControl(time) {
         velocity.x += scale * time;
         positionY -= scale * time;
     }
-
     controls.getObject().translateX(velocity.x * time);
     controls.getObject().translateZ(velocity.z * time);
 }
@@ -52,17 +51,25 @@ function readKeyboard() {
                 break;
         }
     }
-    function mouseClick(event){
+    function mouseClick(event) {
+        if (boolBlaster) {
+            BlasterSound()
 
-        var vec = new THREE.Vector3(); // create once and reuse
-        vec.set(
-            ( event.clientX / window.innerWidth ) * 2 - 1,
-            - ( event.clientY / window.innerHeight ) * 2 + 1,
-            -1 );
-        shoot.position.x = controls.getObject().position.x;
-        shoot.position.y = controls.getObject().position.y;
-        shoot.position.z = controls.getObject().position.z+30;
-        shoot.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), vec.clone().normalize());
+            var vec = new THREE.Vector3(); // create once and reuse
+            vec.set(
+                (event.clientX / window.innerWidth) * 2 - 1,
+                - (event.clientY / window.innerHeight) * 2 + 1,
+                -1);
+            shoot.position.x = controls.getObject().position.x;
+            shoot.position.y = controls.getObject().position.y;
+            shoot.position.z = controls.getObject().position.z + 30;
+            shoot.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), vec.clone().normalize());
+            boolBlaster = 0;
+        }
+    }
+
+    function mouseRelease(event) {
+        boolBlaster = 1;
     }
     function onKeyUp(event) {
         switch (event.keyCode) {
@@ -86,7 +93,8 @@ function readKeyboard() {
                 break;
         }
     }
-    document.addEventListener('click', mouseClick, false);
+    document.addEventListener('mousedown', mouseClick, false);
+    document.addEventListener('mouseup', mouseRelease, false);
     document.addEventListener('keydown', onKeyDown, false);
     document.addEventListener('keyup', onKeyUp, false);
 }
