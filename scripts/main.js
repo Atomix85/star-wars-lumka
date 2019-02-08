@@ -11,6 +11,7 @@ var deathStar;
 var ActivateGUI = true;
 var shoot, lightShoot;
 var startButton = document.getElementById('startButton');
+var boolBlaster = 1;
 startButton.addEventListener('click', init);
 
 function init() {

@@ -7,12 +7,40 @@ function AmbientSound() {
     audioLoader.load('./sounds/ambient1.mp3', function (buffer) {
         sound.setBuffer(buffer);
         sound.setLoop(true);
-        sound.setVolume(0.5);
+        sound.setVolume(0.3);
         sound.play();
     });
     console.log('Sound : ' + sound + ' loaded');
 }
 
+
+function BlasterSound() {
+    if (boolBlaster) {
+        var sound = new THREE.Audio(listener);
+
+        var audioLoader = new THREE.AudioLoader();
+        audioLoader.load('./sounds/blaster.mp3', function (buffer) {
+            sound.setBuffer(buffer);
+            sound.setLoop(false);
+            sound.setVolume(1);
+            sound.play();
+        });
+    }
+}
+
+function Shout() {
+    if (boolBlaster) {
+        var sound = new THREE.Audio(listener);
+
+        var audioLoader = new THREE.AudioLoader();
+        audioLoader.load('./sounds/dying.mp3', function (buffer) {
+            sound.setBuffer(buffer);
+            sound.setLoop(false);
+            sound.setVolume(1);
+            sound.play();
+        });
+    }
+}
 function FindRandomSound() {
     var sound;
     var rand = Math.floor((Math.random() * 4));
@@ -46,7 +74,7 @@ function AddSoundEffect(object, name, randomFile, file, loop) {
     var audioLoader = new THREE.AudioLoader();
     audioLoader.load('./sounds/'+ file, function (buffer) {
         sound.setBuffer(buffer);
-        sound.setVolume(1.25);
+        sound.setVolume(3);
         sound.setLoop(loop);
         sound.setRefDistance(7);
         sound.play();

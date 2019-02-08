@@ -195,8 +195,6 @@ function CreateDeathStar(size, x, y, z) {
         specular: 0x333333,
         shininess: 15,
         map: new THREE.TextureLoader().load("./textures/deathstar1.jpg"),
-        //specularMap: textureLoader.load("textures/planets/earth_specular_2048.jpg"),
-        //normalMap: textureLoader.load("textures/planets/earth_normal_2048.jpg"),
         normalScale: new THREE.Vector2(0.85, 0.85)
     });
     var geometry = new THREE.SphereBufferGeometry(size, size * 2, size * 2)

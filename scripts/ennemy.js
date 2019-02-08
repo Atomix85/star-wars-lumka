@@ -26,7 +26,8 @@ function initStorm(){
 function updateEnnemyShooter(){
     if(shoot.position.x + 5 > ennemy.position.x && ennemy.position.x > shoot.position.x -5
         && shoot.position.z + 5 > ennemy.position.z && ennemy.position.z > shoot.position.z -5  //AABB
-        && 25 > shoot.position.y && shoot.position.y > 10){
+        && 25 > shoot.position.y && shoot.position.y > 10) {
+        Shout();
         ennemy.position.set(Math.random() * 400 -200,0,-200);
     }
 }
